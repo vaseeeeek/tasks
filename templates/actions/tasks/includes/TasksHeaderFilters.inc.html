@@ -1,0 +1,79 @@
+{***
+ * HTML SNIPPET INCLUDE
+ * Filters in header of page
+**}
+
+{include file="./TasksHeaderFiltersHelpers.inc.html" inline}
+
+<!-- HASH FILTER -->
+
+<ul class="chips small" style="position: relative;">
+{show_filter
+    class='t-tasks-hash-type-filter js-header-title-participant'
+    filter=[
+        'id' => 'hash_type',
+        'options' => [
+            [
+                'id' => '',
+                'name' => '[`All`]'
+            ],
+            [
+                'id' => 'inbox',
+                'name' => '[`Inbox`]'
+            ],
+            [
+                'id' => 'outbox',
+                'name' => '[`Outbox`]'
+            ],
+            [
+                'id' => 'favorites',
+                'name' => '[`Watching`]'
+            ],
+            [
+                'id' => 'urgent',
+                'name' => '[`Urgent`]'
+            ]
+        ]
+    ]
+}
+
+
+<!-- OTHER SELECTOR FILTERS -->
+{foreach $filter_types as $id => $filter}
+    {$_data_keys = []}
+    {if $id === 'milestone_id'}
+        {$_data_keys = ['project_id','description']}
+    {/if}
+    {show_filter class='t-tasks-filter js-header-title-participant' filter=$filter data_keys=$_data_keys}
+{/foreach}
+
+<!-- TAG CLOUD WIDGET FILTER -->
+{showTagsCloud class='t-tasks-tag-cloud-filter js-header-title-participant' cloud=$tags_cloud}
+
+<!-- plugin hook: 'backend_tasks.%plugin_id%.header.filters' -->
+{* @event backend_tasks.%plugin_id%.header.filters *}
+{foreach $_backend_header_hooks as $_}
+    {$_filters = $_.filters|default:[]}
+    {foreach $_filters as $_filter}
+        {$_filter|default:''}
+    {/foreach}
+{/foreach}
+
+<!-- RESET FILTERS BUTTON -->
+
+{if !empty($is_filter_set) && !empty($no_filters_hash)}
+    <a href="{$no_filters_hash}" class="t-remove-filters-link gray larger">
+        <i class="fas fa-times-circle" title="[`Clear filters`]"></i>
+    </a>
+    <style>
+        #t-filters-menu { display: block; }
+    </style>
+    <script>
+        (function ($) {
+            $('#t-my-lists-box').show();
+            $('#t-selection-menu').show();
+        })(jQuery);
+    </script>
+{/if}
+
+</ul>

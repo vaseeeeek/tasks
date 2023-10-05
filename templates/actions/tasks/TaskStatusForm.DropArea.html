@@ -1,0 +1,57 @@
+<div class="t-status-comment-wrapper">
+
+    <div class="t-big-editor-wrapper">
+
+        {* TEXTAREA *}
+        <div class="t-textarea-wrapper">
+            <textarea name="text" cols="" rows="" class="t-redactor-comments width-100" placeholder="[`Add comment`]"></textarea>
+        </div>
+
+        {if empty($is_bulk)}
+            {* ATTACH *}
+            <div class="t-attach-wrapper">
+
+                {* Droparea *}
+                <div class="t-attach-droparea">
+                    <div class="t-droparea-hint">[`Attach files`]</div>
+                    <input type="file" name="files[]" multiple="true" />
+                </div>
+
+            </div>
+        {/if}
+
+    </div>
+
+    {if empty($is_bulk)}
+        {* ATTACH *}
+        <div class="t-attach-wrapper">
+
+            {* Container For Attached Files*}
+            <div class="t-attached-files-wrapper">
+                <div class="t-images-list">
+                    <div class="t-image-item is-template">
+                        <a class="t-image-link" href="javascript:void(0);">
+                            <img src="" alt="">
+                        </a>
+                        <div class="t-file-name"></div>
+                        <div class="t-file-size"></div>
+                        <a class="t-file-delete" href="javascript:void(0);"></a>
+                        <div class="t-file-error"></div>
+                    </div>
+                </div>
+                <div class="t-files-list">
+                    <div class="t-file-item is-template">
+                        <div class="t-file-link">
+                            <i class="fas fa-cloud-download-alt custom-mr-4"></i>
+                            <span class="t-file-name"></span>
+                            <span class="t-file-size"></span>
+                        </div>
+                        <a class="t-file-delete" href="javascript:void(0);"></a>
+                        <div class="t-file-error"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/if}
+
+</div>

@@ -1,0 +1,20 @@
+<script>
+    (function () {
+
+        function runChart () {
+            amchart('logs-chart-wrapper', {json_encode($chart_data)}, '{$wa->locale()}');
+        }
+
+        if (typeof am4core === 'undefined') {
+            var script = document.createElement('script');
+            script.onload = function () {
+                runChart();
+            };
+            script.src = "{$wa_url}wa-apps/tasks/js/amcharts/amcharts.js";
+            document.head.appendChild(script);
+        } else {
+            runChart();
+        }
+        
+    })();
+</script>
